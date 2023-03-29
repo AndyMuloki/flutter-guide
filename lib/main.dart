@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 // void main() {
 //   runApp(MyApp());
 // }
@@ -7,7 +9,25 @@ import 'package:flutter/material.dart';
 // this is used for functions that have exactly only one expression
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // ignore: todo
+    // TODO: implement createState
+    return _MyAppState();
+  }
+}
+
+class _MyAppState extends State<MyApp> {
+  var _questionIndex = 0;
+
+  void _answerQuestion() {
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
+    print(_questionIndex);
+  }
+
   @override
   Widget build(BuildContext context) {
     var questions = [
@@ -21,18 +41,22 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text('question?'),
+            Question(
+              questions[_questionIndex],
+            ),
             ElevatedButton(
               child: Text('Answer1'),
-              onPressed: null,
+              onPressed: _answerQuestion,
             ),
             ElevatedButton(
               child: Text('Answer2'),
-              onPressed: null,
+              onPressed: () => print("Answer 2 chosen!"),
             ),
             ElevatedButton(
               child: Text('Answer3'),
-              onPressed: null,
+              onPressed: () {
+                print('Answer 3 chosen!');
+              },
             ),
           ],
         ),
